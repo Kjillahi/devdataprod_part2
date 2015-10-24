@@ -83,7 +83,7 @@ head(mtcars, 3)
 - A shiny-App that shows the relationship between variables and miles per gallon (MPG).
 
 ### Part2: Reproducible Pitch Presentation  
-- URL: *http://kjillahi.github.io/devdataprod-cp/part2_devdataprod-slidify*
+- URL: *https://kjillahi.github.io/devdataprod_part2/index.html*
 
 ### Get all SourceCode @Github:
 
