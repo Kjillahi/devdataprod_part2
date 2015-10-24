@@ -1,0 +1,93 @@
+---
+title       : Relationship between variables and MPG
+subtitle    : mtcars dataset
+author      : Kjillahi
+job         : Part2 - Reproducible Pitch Presentation
+logo        : logo.jpg
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [bootstrap]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- 
+
+## Documentation
+
+### Introduction
+
+> We are interested in exploring the relationship between other variables and miles per gallon (MPG)
+
+> The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).
+
+### Usage
+- Select any other varriable on the side bar to see its relationship with MPG"),
+- The Regression Model Tab show the actual relationship with the model info beneath
+- The box plot shows a plot of distribution of the varriable in relationship to MPG
+- The Show Outliers Check box shows other data point which are outliers in the box plot 
+
+
+---
+
+## Dataset - Format
+
+```{r}
+library(datasets)
+head(mtcars, 3)
+```
+
+**A data frame with 32 observations on 11 variables.**
+
+| Index | Field | Detail |
+------- | ----- | ------ |
+| [, 1] | mpg | Miles/(US) gallon |
+| [, 2]  | cyl | Number of cylinders |
+| [, 3]	| disp | Displacement (cu.in.) |
+| [, 4]	| hp | Gross horsepower |
+| [, 5]	| drat | Rear axle ratio |
+| [, 6]	| wt | Weight (lb/1000) |
+| [, 7]	| qsec | 1/4 mile time |
+| [, 8]	| vs | V/S |
+| [, 9]	| am | Transmission (0 = automatic, 1 = manual) |
+| [,10]	| gear | Number of forward gears |
+| [,11]	| carb | Number of carburetors |
+
+---
+
+## Analysis - main code
+
+```r
+  formulaTextPoint <- reactive({
+    paste("mpg ~", "as.integer(", input$variable, ")")  })
+  
+  fit <- reactive({
+    lm(as.formula(formulaTextPoint()), data=mpgData)  })
+  ...
+  output$fit <- renderPrint({
+    summary(fit()) })
+  
+  output$mpgPlot <- renderPlot({
+    with(mpgData, {
+      plot(as.formula(formulaTextPoint()))
+      abline(fit(), col=2)
+    })  })
+
+```
+
+---
+
+## Deployed App
+
+### Part1: Shiny Application  
+- URL: *https://kjillahi.shinyapps.io/part1_shiny*
+- A shiny-App that shows the relationship between variables and miles per gallon (MPG).
+
+### Part2: Reproducible Pitch Presentation  
+- URL: *http://swhgoon.github.io/devdataprod-cp/part2_devdataprod-slidify*
+
+### Get all SourceCode @Github:
+
+```
+git clone https://github.com/Kjillahi/devdataprod_part1.git
+```
+
